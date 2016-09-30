@@ -1,0 +1,21 @@
+.navbar{
+	border-radius: 0;
+}
+
+.navbar-brand{
+	font-family: 'Satisfy',cursive
+}
+
+body{
+	background-color: white url("/images/background.png");
+}
+
+hr{
+	width: 500px;
+	visibility: hidden;
+}
+
+sub small{
+	color: black;
+	font-style: italic;
+}

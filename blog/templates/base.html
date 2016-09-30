@@ -1,0 +1,110 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block head %}Well come to Blog {% endblock head %}</title>
+<!--
+
+ <!-- Latest compiled and minified CSS 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	-->
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/base.css' %}">
+    <!-- <link rel="stylesheet" href= "{% static 'css/bootstrap.css' %}" /> -->
+    <link rel="stylesheet" href= "{% static 'css/bootstrap.min.css' %}" />
+    <!-- <link rel="stylesheet" href= "{% static 'css/bootstrap-theme.css' %}" /> -->
+
+    <link rel="stylesheet" href= "{% static 'css/bootstrap-theme.min.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topnavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'posts:list' %}">My Blog</a>
+          
+        </div>
+          
+         <div class="collapse navbar-collapse" id="topnavbar">
+            <ul class="nav navbar-nav">
+              <li class="">
+                  <a href="{% url 'posts:list' %}">Articles</a>
+                    <!-- <span class="glyphicon glyphicon-article" aria-hidden="true"></span>&nbsp; --> 
+              </li>
+              <li class="">
+                  <a href="#">About us</a>
+                    <!-- <span class="glyphicon glyphicon-about" aria-hidden="true"></span>&nbsp; -->
+              </li>
+
+            </ul>
+            <form class="navbar-form navbar-left" role="search" method="get" action="#">
+              <div class="input-group">
+                    <input type='text' name='q' class="form-control" placeholder='Search Article' value='{{ request.GET.q }}'/>
+                  <span class="input-group-btn">
+                  <input type="submit" class="btn btn-default">Search</input>
+                  </span>
+              </div>
+            </form>
+             {% if user.is_authenticated %}
+            <ul class="nav navbar-nav navbar-right">
+                 <li class="">
+                  <a href="{% url 'posts:create' %}">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Article
+                  </a>
+                </li>
+                <li class="">
+
+                    <a href="/posts/">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="/login/">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Login
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+         </div> 
+
+      </div>
+      
+    </nav>
+</head>
+<br>
+<body>
+<div id="fb-root"></div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.6";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    {% include "messages_display.html" %}
+<div class="container">
+{% block content %}
+
+{% endblock content %}
+</div>
+<!--
+<!-- Latest compiled and minified JavaScript 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+-->
+
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>
