@@ -1,9 +1,3 @@
-
-
-try:
-    from urllib.parse import quote_plus #python 3
-except: 
-    pass
 from django.contrib import messages
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -35,8 +29,7 @@ def post_create(request):
     else:
         raise Http404
 
-def post_detail(request, slug=None):    #retrive
-   # if instance.publish > timezone.now().date():
+def post_detail(request, slug=None):  
         if request.user.is_staff or not request.user.is_superuser:
             instance = get_object_or_404(Post, slug=slug)
             context = {
@@ -62,16 +55,15 @@ def post_list(request):
                 Q(user__first_name__icontains=query)|
                 Q(user__last_name__icontains=query)
                 ).distinct()
-    paginator = Paginator(queryset_list, 4) # Show 25 contacts per page
+    paginator = Paginator(queryset_list, 4) 
     page_request_var = 'page'
     page = request.GET.get(page_request_var)
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
         queryset = paginator.page(1)
     except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
+
         queryset = paginator.page(paginator.num_pages)
     context = {
         "object_list": queryset,
@@ -112,7 +104,6 @@ def post_delete(request, slug=None):
 
 
 def user_logout(request):
-    # Since we know the user is logged in, we can now just log them out.
     logout(request)
     # Take the user back to the homepage.
     return HttpResponseRedirect('/posts/')
